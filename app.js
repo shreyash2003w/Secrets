@@ -11,7 +11,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const findOrCreate = require('mongoose-findorcreate');
 const app = express();
-
+const PORT = process.env.PORT || 3000;
 app.use(express.static("public"));
 app.set('view engine','ejs');
 app.use(bodyParser.urlencoded({
@@ -30,7 +30,7 @@ app.use(passport.session());
 
 
 //Connecting to DB
-mongoose.connect('mongodb://127.0.0.1:27017/userDB',{useNewUrlParser:true});
+mongoose.connect(process.env.DB_STRING,{useNewUrlParser:true});
 
 
 
@@ -189,6 +189,6 @@ app.post('/login',function(req,res){
     })
 })
 
-app.listen(3000,function(req,res){
-    console.log("Server is running on port 3000");
+app.listen(PORT,function(req,res){
+    console.log("Server is running  ");
 })
